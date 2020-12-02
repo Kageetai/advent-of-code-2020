@@ -9,6 +9,6 @@ const fetchInput = (day) =>
         `session=${process.env.sessionCookie}`,
     },
     method: "GET",
-  }).then((r) => r.text());
+  }).then((r) => r.text()).then(t => t.split('\n'));
 
 module.exports = fetchInput;
