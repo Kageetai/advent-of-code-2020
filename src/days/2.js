@@ -1,12 +1,12 @@
 const regex = /(\d+)-(\d+)\s(\w):\s(\w+)/;
-const stripOthers = (char) => new RegExp(String.raw`[^${char}]`);
 
 module.exports = (input) =>
   input
     .filter((i) => !!i)
     .filter((i) => {
-      const [match, from, to, char, password] = i.match(regex);
-      const charCount = (password.match(new RegExp(char, "g"), "") || []).length;
+      const [, a, b, char, password] = i.match(regex);
+      const charA = password[parseInt(a) - 1];
+      const charB = password[parseInt(b) - 1];
 
-      return charCount >= from && charCount <= to;
+      return (charA === char || charB === char) && charA !== charB;
     }).length;
